@@ -19,7 +19,7 @@ const session = require('express-session');
 // Garantir que sessoes sejam salvas no banco
 const MongoStore = require('connect-mongo');
 // Flash messages
-const flashMessage = require('connect-flash');
+const flash = require('connect-flash');
 
 // Rotas da aplicaçao
 const routes = require('./routes');
@@ -54,7 +54,7 @@ const sessionOptions = session({
 });
 
 app.use(sessionOptions);
-app.use(flashMessage());
+app.use(flash());
 
 // Arquivos que sao renderizados na tela
 app.set('views', path.resolve(__dirname, 'src', 'views'));
