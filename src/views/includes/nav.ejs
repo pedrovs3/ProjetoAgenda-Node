@@ -6,11 +6,22 @@
     </button>
     <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
       
-      <ul class="navbar-nav p-1">
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-      </ul>
+      <% if (user) { %>
+        <ul class="navbar-nav p-1">
+          <li class="nav-item">
+            <a class="nav-link" href="/contato">Cadastrar contato</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/login/logout">Sair</a>
+          </li>
+        </ul>
+        <% } else { %>
+          <ul class="navbar-nav p-1">
+            <li class="nav-item">
+              <a class="nav-link" href="login/">Entrar</a>
+            </li>
+          </ul>
+        <% } %> 
     
     </div>
   </div>
