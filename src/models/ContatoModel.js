@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const { async } = require('regenerator-runtime');
 const validator = require('validator');
 
 const ContatoSchema = new mongoose.Schema({
@@ -22,8 +21,8 @@ class Contato {
   async register() {
     this.validate();
 
-    if(this.errors.length > 0) return;
-  
+    if (this.errors.length > 0) return;
+
     this.contato = await ContatoModel.create(this.body);
   }
 
@@ -32,10 +31,13 @@ class Contato {
 
     // Validação
     // O Email precisa ser valido
-    if (this.body.email && !validator.isEmail(this.body.email)) this.errors.push('E-mail inválido');
+    if (this.body.email && !validator.isEmail(this.body.email))
+      this.errors.push('E-mail inválido');
     if (!this.body.nome) this.errors.push('Nome é um campo obrigatório.');
-    if (!this.body.email && !this.body.telefone) 
-      this.errors.push('Um contato precisa conter no mínimo um e-mail ou telefone.');
+    if (!this.body.email && !this.body.telefone)
+      this.errors.push(
+        'Um contato precisa conter no mínimo um e-mail ou telefone.'
+      );
   }
 
   cleanUp() {
@@ -44,7 +46,7 @@ class Contato {
         this.body[key] = '';
       }
     }
-  
+
     this.body = {
       nome: this.body.nome,
       sobrenome: this.body.sobrenome,
@@ -53,13 +55,20 @@ class Contato {
     };
   }
 
-  
+  async edit(id) {
+    if (typeof id !== 'string') return;
+    this.validate();
+    if (this.errors.length > 0) return;
+
+    this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true });
+  }
 }
 
-Contato.buscarPorId = async (id) => {
+Contato.searchById = async (id) => {
   if (typeof id !== 'string') return;
+  
   const user = await ContatoModel.findById(id);
   return user;
-}
+};
 
 module.exports = Contato;
