@@ -5,16 +5,21 @@
   <div class="row">
     <div class="col-lg-2"></div>
     
-    <div class="col-lg-8 my-3">
+    <div class="col-lg-8 my-5">
       <h1 class="text-center">Agenda</h1>
       <p class="text-center lead">Seus contatos estão abaixo!</p>
 
       <%- include('includes/messages') %>       
 
-      
         <% if (contatos.length > 0) { %>
-          <div class="responsive-table my-2"></div>
+          <div class="responsive-table my-3"></div>
             <table class="table">
+              <tr class="text-white bg-secondary">
+                <td>Nome:</td>
+                <td>Sobrenome:</td>
+                <td>Telefone:</td>
+                <td>Email:</td>
+              </tr>
               <% contatos.forEach((contato) => { %> 
                 <tr>
                   <td><%= contato.nome %></td>
@@ -24,16 +29,12 @@
                   <td><a href="/contato/<%= contato._id %>">Editar</a></td>
                   <td><a class="text-danger" href="/contato/delete/<%= contato._id %>">Excluir</a></td>
                 </tr>
-              
               <% }); %> 
-              
             </table>
         </div>
         <% } else{ %>
           <p class="text-center lead">Nao existem contatos na sua agenda!</p>
         <% } %> 
-      
-
     </div>
     
     <div class="col-lg-2"></div>
