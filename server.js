@@ -6,7 +6,10 @@ const app = express();
 // Importaçao do mongoose (modelagem do banco, e garantir que os dados serao enviados da maneira como gostariamos)
 const mongoose = require('mongoose');
 mongoose
-  .connect(process.env.CONNECTIONSTRING, {useNewUrlParser: true, useUnifiedTopology: true})
+  .connect(process.env.CONNECTIONSTRING, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => {
     app.emit('pronto');
   })
@@ -30,7 +33,11 @@ const helmet = require('helmet');
 const csrf = require('csurf');
 
 // Importaçao dos middlewares criados em outro arquivo
-const { middlewareGlobal, checkCsrfError, csrfMiddleware } = require('./src/middlewares/middleware');
+const {
+  middlewareGlobal,
+  checkCsrfError,
+  csrfMiddleware,
+} = require('./src/middlewares/middleware');
 
 app.use(helmet());
 
@@ -41,7 +48,7 @@ app.use(express.json());
 // Arquivos estaticos da nossa aplicaçao e devem ser acessados, diretamente
 app.use(express.static(path.resolve(__dirname, 'public')));
 
-// Configurações de sessao 
+// Configurações de sessao
 const sessionOptions = session({
   secret: 'asdadsjncsdncas',
   store: MongoStore.create({ mongoUrl: process.env.CONNECTIONSTRING }),

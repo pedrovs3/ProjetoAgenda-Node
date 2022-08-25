@@ -61,14 +61,27 @@ class Contato {
     if (this.errors.length > 0) return;
 
     this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true });
-  }
+  }  
 }
 
 Contato.searchById = async (id) => {
   if (typeof id !== 'string') return;
   
-  const user = await ContatoModel.findById(id);
-  return user;
+  const contato = await ContatoModel.findById(id);
+  return contato;
 };
+
+Contato.searchContacts = async () => {
+  const contatos = await ContatoModel.find()
+    .sort({ criadoEm: -1 });
+  return contatos;
+}
+
+Contato.delete = async (id) => {
+  if (typeof id !== 'string') return;
+  
+  const contato = await ContatoModel.findOneAndDelete({_id: id});
+  return contato;
+}
 
 module.exports = Contato;
