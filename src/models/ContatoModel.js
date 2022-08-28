@@ -1,3 +1,10 @@
+/**
+ * Objetivo: Arquivo responsavel pelos
+ * "tratamentos" de dados da pagina contato da aplicaçao
+ * assim como a validaçao dos mesmos
+ * Autor: Pedro Henrique Vieira
+ */
+
 const mongoose = require('mongoose');
 const validator = require('validator');
 
@@ -60,28 +67,29 @@ class Contato {
     this.validate();
     if (this.errors.length > 0) return;
 
-    this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, { new: true });
-  }  
+    this.contato = await ContatoModel.findByIdAndUpdate(id, this.body, {
+      new: true,
+    });
+  }
 }
 
 Contato.searchById = async (id) => {
   if (typeof id !== 'string') return;
-  
+
   const contato = await ContatoModel.findById(id);
   return contato;
 };
 
 Contato.searchContacts = async () => {
-  const contatos = await ContatoModel.find()
-    .sort({ criadoEm: -1 });
+  const contatos = await ContatoModel.find().sort({ criadoEm: -1 });
   return contatos;
-}
+};
 
 Contato.delete = async (id) => {
   if (typeof id !== 'string') return;
-  
-  const contato = await ContatoModel.findOneAndDelete({_id: id});
+
+  const contato = await ContatoModel.findOneAndDelete({ _id: id });
   return contato;
-}
+};
 
 module.exports = Contato;

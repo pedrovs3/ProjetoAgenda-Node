@@ -1,7 +1,12 @@
+/**
+ * Objetivo: Arquivo responsavel pela chamada do model de Login.
+ * Autor: Pedro Henrique Vieira
+ */
+
 const Login = require('../models/loginModel');
 
 exports.index = (req, res) => {
-  if(req.session.user) return res.render('logado')
+  if (req.session.user) return res.render('logado');
   return res.render('login');
 };
 
@@ -46,7 +51,6 @@ exports.login = async (req, res) => {
     req.session.save(() => {
       return res.redirect('./');
     });
-
   } catch (e) {
     console.log(e);
     return res.render('404');
@@ -57,4 +61,4 @@ exports.logout = (req, res, next) => {
   req.session.destroy();
   res.redirect('/');
   next();
-}
+};

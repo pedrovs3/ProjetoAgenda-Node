@@ -1,3 +1,8 @@
+/**
+ * Objetivo: Arquivo que contem os middlewares da aplicaçao.
+ * Autor: Pedro Henrique Vieira
+ */
+
 exports.middlewareGlobal = (req, res, next) => {
   res.locals.errors = req.flash('errors');
   res.locals.success = req.flash('success');

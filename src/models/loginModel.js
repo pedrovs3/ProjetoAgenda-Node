@@ -1,3 +1,8 @@
+/**
+ * Objetivo: Arquivo responsavel pelo tratamento de dados do login, assim como a validaçao.
+ * Autor: Pedro Henrique Vieira
+ */
+
 const mongoose = require('mongoose');
 const validator = require('validator');
 const bcryptjs = require('bcryptjs');
@@ -19,15 +24,15 @@ class Login {
   async login() {
     this.validate();
     if (this.errors.length > 0) return;
-    
-    this.user = await LoginModel.findOne({ email: this.body.email })
 
-    if(!this.user) {
+    this.user = await LoginModel.findOne({ email: this.body.email });
+
+    if (!this.user) {
       this.errors.push('Usuário inexistente!');
       return;
     }
 
-    if(!bcryptjs.compareSync(this.body.password, this.user.password)) {
+    if (!bcryptjs.compareSync(this.body.password, this.user.password)) {
       this.errors.push('Senha Inválida.');
       this.user = null;
       return;
@@ -48,8 +53,8 @@ class Login {
   }
 
   async userExists() {
-    this.user = await LoginModel.findOne({ email: this.body.email })
-    if (this.user) this.errors.push('Usuário já existente.')
+    this.user = await LoginModel.findOne({ email: this.body.email });
+    if (this.user) this.errors.push('Usuário já existente.');
   }
 
   validate() {

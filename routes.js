@@ -1,3 +1,7 @@
+/**
+ * Objetivo: Arquivo que contem as rotas da aplicaçao
+ * Autor: Pedro Henrique Vieira
+ */
 const express = require('express');
 const route = express.Router();
 const homeController = require('./src/controllers/homeController');

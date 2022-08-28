@@ -1,3 +1,8 @@
+/**
+ * Objetivo: Arquivo responsavel pela chamada do model de Contato.
+ * Autor: Pedro Henrique Vieira
+ */
+
 const Contato = require('../models/ContatoModel');
 
 exports.index = (req, res) => {
@@ -65,7 +70,7 @@ exports.delete = async (req, res) => {
   const contato = await Contato.delete(req.params.id);
   if (!contato) return res.render('404');
 
-  req.flash('success','Contato apagado com sucesso');
+  req.flash('success', 'Contato apagado com sucesso');
   req.session.save(() => res.redirect('back'));
   return;
-}
+};
