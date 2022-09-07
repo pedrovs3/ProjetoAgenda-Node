@@ -39,7 +39,7 @@ const {
   csrfMiddleware,
 } = require('./src/middlewares/middleware');
 
-app.use(helmet());
+app.use(helmet({ contentSecurityPolicy: false }));
 
 // Está dizendo que podemos postar um formulario para a nossa aplicaçao
 app.use(express.urlencoded({ extended: true }));
